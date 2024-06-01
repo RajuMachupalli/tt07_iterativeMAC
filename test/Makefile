@@ -12,7 +12,7 @@ ifneq ($(GATES),yes)
 # RTL simulation:
 SIM_BUILD				= sim_build/rtl
 VERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(PROJECT_SOURCES))
-VERILOG_SOURCES += $(SRC_DIR)/adder.v $(SRC_DIR)/multi.v $(SRC)/lisa_qqspi.v
+VERILOG_SOURCES += $(SRC_DIR)/adder.v $(SRC_DIR)/multi.v
 COMPILE_ARGS 		+= -I$(SRC_DIR)
 
 else
