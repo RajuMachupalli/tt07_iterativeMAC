@@ -1,3 +1,24 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: Raju Machupalli
+// 
+// Create Date: 06/01/2024 08:21:00 AM
+// Design Name: 
+// Module Name: tt_rajum_iterativeMAC
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
 /*
  * Copyright (c) 2024 Your Name
  * SPDX-License-Identifier: Apache-2.0
@@ -48,8 +69,11 @@ always @(posedge clk)
 	end
 	else begin 
 	  case (state)
-	  3'b000: state <= state + 1;
-	  3'b001:begin
+	  3'b000: begin 
+	    state <= state + 1;
+	    result[31:16] <= out;
+	    end
+	  3'b001: begin
 	    sum <= temp_c;
 	    result <= result << 8;
 	    if (mode == 1'b0) state <= state;
@@ -117,4 +141,5 @@ assign temp_a = sum;
   wire _unused = &{ena, 1'b0};
 
 endmodule
+
 
