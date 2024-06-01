@@ -42,7 +42,7 @@ module tt_um_rajum_iterativeMAC (
   reg [6:0] inp_a; // To store the input activation
   reg [31:0] sum, result; // to store bias and multiplication results
   reg [2:0] state; //fsm state
-  reg ref;
+  wire out_th;
   reg [31:0] temp_b;
   wire [31:0] temp_a, temp_c;
 
@@ -56,10 +56,10 @@ module tt_um_rajum_iterativeMAC (
   // instatiate multiplier 
   multi mu (inp_a, ui_in, out);
   
-  //assign ref = |out[14:11];
-  always @(*) begin
-    ref = out[14] | out[13] | out[12] | out[11];
-  end
+  assign out_th = |out[14:11];
+  //always @(*) begin
+  //  out_th = out[14] | out[13] | out[12] | out[11];
+  //end
 
   adder ad (temp_a, temp_b, temp_c);
 
@@ -84,20 +84,20 @@ always @(posedge clk)
 	    result <= result << 8;
 	    if (mode == 1'b0) state <= state;
 	    else begin 
-	      if (ref == 1'b1) state<= 3'b101;
+	      if (out_th == 1'b1) state<= 3'b101;
 	      else state <= state + 1;
 	    end
 	  end
 	  3'b010: begin
 	    sum <= temp_c;
 	    result <= result << 8;
-	    if (ref == 1'b1) state<= 3'b110;
+	    if (out_th == 1'b1) state<= 3'b110;
 	    else state <= state + 1;
 	  end
 	  3'b011: begin
 	    sum <= temp_c;
 	    result <= result << 8;
-	    if (ref == 1'b1) state<= 3'b111;
+	    if (out_th == 1'b1) state<= 3'b111;
 	    else state <= state + 1;
 	  end
 	  3'b100: begin
