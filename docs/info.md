@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+The design contains iterative multiplication and addition unit. The multiplier is a 7x8 bit unit. At reset time, input through ui_in pins stores in a reg and used as operand 1 for multiplier. After reset, operand 2 for multiplier is supplied through ui_in at each clock cycle. The bidirectional pins provide operand 3 which will be added to the multiplier output. the output is read through uo_out pins.  
 
 ## How to test
 
-Explain how to use your project
+It's a bit complex, as bias values are supplied in different sequences, and output needs to change or align with the read output. Full instructions will be added here once the design is submitted for fabrication.
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+It does not require any additional hardware supply the input data using CPU.
