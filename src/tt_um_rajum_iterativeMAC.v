@@ -42,7 +42,7 @@ module tt_um_rajum_iterativeMAC (
   reg [6:0] inp_a; // To store the input activation
   reg [31:0] sum, result; // to store bias and multiplication results
   reg [2:0] state; //fsm state
-  wire [0:0] ref;
+  reg ref;
   reg [31:0] temp_b;
   wire [31:0] temp_a, temp_c;
 
@@ -56,7 +56,11 @@ module tt_um_rajum_iterativeMAC (
   // instatiate multiplier 
   multi mu (inp_a, ui_in, out);
   
-  assign ref = |out[14:11];
+  //assign ref = |out[14:11];
+  always @(*) begin
+    ref = out[14] | out[13] | out[12] | out[11];
+  end
+
   adder ad (temp_a, temp_b, temp_c);
 
 //FSM for iterative operation
