@@ -56,7 +56,7 @@ module tt_um_rajum_iterativeMAC (
   // instatiate multiplier 
   multi mu (inp_a, ui_in, out);
   
-  assign ref = out[14] | out[13] | out[12] | out[11];
+  assign ref = |out[14:11];
   adder ad (temp_a, temp_b, temp_c);
 
 //FSM for iterative operation
